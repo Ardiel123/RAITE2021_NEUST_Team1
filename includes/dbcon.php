@@ -5,9 +5,9 @@
 	}
 
 	$host = "localhost:3307";
-	$user = "root";
+	$username = "root";
 	$pass = "";
 	$database = "neust_one";
 
-	$db = mysqli_connect($host,$user,$pass,$database);
+	$db = mysqli_connect($host,$username,$pass,$database);
 ?>

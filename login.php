@@ -3,6 +3,16 @@ include('header_login.php');
  include('login_process.php');
 
  ?>
+ <script src="https://www.google.com/recaptcha/api.js?render=6LfWiOMcAAAAAFj6DMhokE3gp2cvCHyklUN0AkUg"></script>
+ <script>
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6LfWiOMcAAAAAFj6DMhokE3gp2cvCHyklUN0AkUg', {action: 'contact'}).then(function(token) {
+              var recaptchaResponse = document.getElementById('recaptchaResponse');
+              console.log(recaptchaResponse);
+              recaptchaResponse.value = token;
+          });
+        });
+    </script>
 
  <body class="wew">	
 	
@@ -12,8 +22,6 @@ include('header_login.php');
 
         <form method="POST">
         	<legend class="mb-5 fs-1 text-center">Login</legend>
-
-
 
             <div class="mb-4">
 

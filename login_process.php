@@ -1,4 +1,5 @@
 <?php
+include('includes/dbcon.php');
 
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -31,7 +32,22 @@
 										
 						if($recaptcha->score >= 0.5){
 
-							echo "Verified";
+							$user = $_POST['user'];
+							$pass = $_POST['pass'];
+
+							$sql = "SELECT * FROM `admin` WHERE `username` = '$user' AND `password` = '$pass'";
+							$res = mysqli_query($db, $sql);
+							$get_acc = mysqli_fetch_assoc($res);
+
+							if (mysqli_num_rows($res) == 1) {
+								$_SESSION['user_log'] = $user;
+								header('location: admin/index.php');
+							}
+							else
+							{
+								header("location: login.php");
+							}
+
 						}
 						else{
 							

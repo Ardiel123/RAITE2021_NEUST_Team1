@@ -1,3 +1,8 @@
+<?php
+	include('../includes/dbcon.php');
+	include('../includes/validate.php');
+	include('logout_process.php');
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -24,25 +29,25 @@
 	    </div>
 	    <ul class="nav-list">
 	      <li>
-	        <a href="#">
+	        <a href="index.php">
 	          <i class='bx bx-grid-alt'></i>
 	          <span class="links_name">Dashboard</span>
 	        </a>
 	      </li>
 	      <li>
-	        <a href="#">
+	        <a href="crew.php">
 	          <i class="fas fa-male"></i>
 	          <span class="links_name">Crews</span>
 	        </a>
 	      </li>
 	      <li>
-	        <a href="#">
+	        <a href="ship.php">
 	          <i class="fas fa-ship"></i>
 	          <span class="links_name">Ships</span>
 	        </a>
 	      </li>
 	      <li>
-	        <a href="#">
+	        <a href="departure.php">
 	          <i class="fas fa-play"></i>
 	          <span class="links_name">Departures</span>
 	        </a>
@@ -81,7 +86,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Logout</button>
+        <form method="POST">
+        	<button type="submit" class="btn btn-primary" name="logout">Logout</button>
+        </form>
       </div>
     </div>
   </div>
