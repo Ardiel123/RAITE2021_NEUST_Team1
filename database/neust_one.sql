@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Oct 23, 2021 at 09:22 AM
+-- Generation Time: Oct 23, 2021 at 10:27 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -61,7 +61,9 @@ CREATE TABLE `crew` (
 --
 
 INSERT INTO `crew` (`crew_id`, `fname`, `surname`, `rank_id`, `ship_id`) VALUES
-(1, 'ardiel', 'salatamos', 1, 11);
+(4, 'ardiel', 'salatamos', 2, 11),
+(5, 'karl', 'pacheco', 6, 12),
+(6, 'Juan', 'Dela cruz', 3, 13);
 
 -- --------------------------------------------------------
 
@@ -73,6 +75,15 @@ CREATE TABLE `departure` (
   `departure_id` int(25) NOT NULL,
   `ship_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `departure`
+--
+
+INSERT INTO `departure` (`departure_id`, `ship_id`) VALUES
+(7, 10),
+(6, 11),
+(8, 12);
 
 -- --------------------------------------------------------
 
@@ -149,12 +160,13 @@ CREATE TABLE `ship` (
 --
 
 INSERT INTO `ship` (`ship_id`, `ship_name`, `speed`, `knots`, `route_id`) VALUES
-(2, 'sh', 'Normal', 23, 2),
+(2, 'Ship100', 'Extra Slow Streaming', 16.5, 2),
 (10, 'ship2', 'Slow Streaming', 19, 1),
 (11, 'ship3', 'Extra Slow Streaming', 16.5, 1),
-(12, 'bark', 'Extra Slow Streaming', 16.5, 1),
+(12, 'Ship4', 'Extra Slow Streaming', 16.5, 1),
 (13, 'big one', 'Minimal Costs', 13.5, 2),
-(14, 'asdasdas', 'Normal', 23, 1);
+(14, 'Ship5', 'Normal', 23, 1),
+(15, 'Ship10', 'Extra Slow Streaming', 16.5, 1);
 
 --
 -- Indexes for dumped tables
@@ -214,13 +226,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `crew`
 --
 ALTER TABLE `crew`
-  MODIFY `crew_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `crew_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `departure`
 --
 ALTER TABLE `departure`
-  MODIFY `departure_id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `departure_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `rank`
@@ -238,7 +250,7 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `ship`
 --
 ALTER TABLE `ship`
-  MODIFY `ship_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ship_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

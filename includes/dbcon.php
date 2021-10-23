@@ -4,7 +4,7 @@
     	session_start();
 	}
 
-	$host = "localhost:3307";
+	$host = "localhost";
 	$username = "root";
 	$pass = "";
 	$database = "neust_one";

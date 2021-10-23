@@ -6,34 +6,15 @@
 
   <div class="myCon">
 
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-            </tr>
-    
-        </tbody>
-        <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </tfoot>
-    </table>
+   <div class="card">
+  <div class="card-header">
+    Dashboard
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Seafarer Dashboard</h5>
+    <p class="card-text"></p>
+  </div>
+</div>
 
   </div>
 

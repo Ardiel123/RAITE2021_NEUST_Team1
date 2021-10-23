@@ -20,33 +20,25 @@
  	$lastname = $_POST['lname'];
  	$rank = $_POST['rank'];
  	$ship = $_POST['ship'];
- 	
 
- 	$insert_det = "INSERT INTO `crew`( `fname`, `surname`, `rank`, `ship_id`) VALUES ('$firstname','$lastname','$rank','$ship')"
- 	;
+ 	$insert_det = "INSERT INTO `crew`( `fname`, `surname`, `rank_id`, `ship_id`) VALUES ('$firstname','$lastname','$rank','$ship')";
 	$result6 = mysqli_query($db,$insert_det);
+
+	echo '<script> window.location.href="crew.php";</script>';
 
  }
 
- if (isset($_POST['save_edit'])) {
-		
-		$crew_id = $_POST['the_id'];
-		$fname = $_POST['upd_fname'];
-		$lname = $_POST['upd_lname'];
-		$rankk = $_POST['upd_rank'];
-		$shipp = $_POST['upd_ship'];
+if (isset($_POST['remove'])) {
 
-		$sql2 = "UPDATE `crew` SET `fname`='$fname', `surname`='$lname', `rank_id`='$rankk', `ship_id`='$shipp' WHERE 'crew_id' = '$crew_id'";
-		mysqli_query($db, $sql2);
+		$deps = $_POST['idd'];
+		
+		$sql55 = "DELETE FROM `crew` WHERE crew_id = '$deps' ";
+		mysqli_query($db, $sql55);
 
 		echo '<script> window.location.href="crew.php";</script>';
-	}
 
-	if (isset($_POST['back_edit'])) {
-		
-		echo '<script> window.location.href="crew.php";</script>';
-	}
 
+	}
 
  ?>
  <script>

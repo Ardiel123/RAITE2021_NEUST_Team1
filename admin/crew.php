@@ -36,7 +36,7 @@
                 <td><?php echo $crew['surname'] ?></td>
                 <td><?php echo $crew['rank_name'] ?></td>
                 <td><?php echo $crew['ship_name'] ?></td>
-                 <td><a href="crew_edit.php?id=<?php echo $crew['crew_id'] ?>"><button type="button" class="btn btn-info">Edit</button></a></td>
+                 <td><form method="POST"><input type="hidden" name="idd" value="<?php echo $crew['crew_id'] ?>"><button type="submit" class="btn btn-danger" name="remove">Remove</button></form></td>
             </tr>
             <?php }while($crew = mysqli_fetch_assoc($result2)) ?>
         </tbody>
@@ -83,7 +83,7 @@
              <label for="rank" class="form-label">Rank:</label>
            <select name="rank" class="form-control">
             <?php do {  ?>
-                <option><?php echo $rank['rank_name'] ?></option>
+                <option value="<?php echo $rank['rank_id'] ?>" ><?php echo $rank['rank_name'] ?></option>
              <?php }while($rank= mysqli_fetch_assoc($result3)) ?>
               
            </select>
@@ -91,9 +91,9 @@
         <div class="mb-3">
              <label for="ship" class="form-label">Ship Name:</label>
            <select name="ship" class="form-control">
-               <?php do {  ?>
-                <option><?php echo $ship['ship_name'] ?></option>
-             <?php }while($ship= mysqli_fetch_assoc($result4)) ?>
+               <?php while($ship= mysqli_fetch_assoc($result4)){  ?>
+                <option value="<?php echo $ship['ship_id'] ?>"><?php echo $ship['ship_name'] ?></option>
+             <?php } ?>
            </select>
           </div>
          
@@ -112,3 +112,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable({
+      "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+    });
+  });
+</script>
