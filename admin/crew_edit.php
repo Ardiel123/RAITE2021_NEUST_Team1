@@ -1,10 +1,10 @@
 <?php
   include('header.php');
-
   include('crew_process.php');
 
   $id = $_GET['id'];
-$query5 = "SELECT * FROM crew WHERE crew_id = $id ";
+
+  $query5 = "SELECT * FROM crew WHERE crew_id = $id ";
 	$result5 = mysqli_query($db,$query5);
 	$crew1 = mysqli_fetch_assoc($result5);
 
@@ -21,64 +21,65 @@ $query5 = "SELECT * FROM crew WHERE crew_id = $id ";
    Edit Crew
   </div>
   <div class="card-body">
-  	<div>
-   <form method="POST" enctype="multipart/form-data">
+
+   <form method="POST">
           <div class="mb-3 mt-3">
-            <label for="fname" class="form-label">First Name:</label>
-            <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname" value="<?php echo $crew1['fname'] ?>">
+            <label for="upd_fname" class="form-label">First Name:</label>
+            <input type="text" class="form-control" id="fname" placeholder="First Name" name="upd_fname" value="<?php echo $crew1['fname'] ?>">
           </div>
           <div class="mb-3">
-            <label for="lname" class="form-label">Last Name:</label>
-            <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname" value="<?php echo $crew1['surname'] ?>">
+            <label for="upd_lname" class="form-label">Last Name:</label>
+            <input type="text" class="form-control" id="lname" placeholder="Last Name" name="upd_lname" value="<?php echo $crew1['surname'] ?>">
           </div>
+
+
           <div class="mb-3">
-             <label for="rank" class="form-label">Rank:</label>
-           <select name="rank" class="form-control">
-            <?php do {  ?>
-                <option><?php echo $crew1['rank'] ?></option>
-             <?php }while($rank= mysqli_fetch_assoc($result3)) ?>
-              
-           </select>
-          </div>
-       <div class="form-group">
-             <label for="img">Display Image: </label>
-             <img id="preimage" src="<?php echo $crew1['image'] ?>">
-            <input  type="file" class="form-control" name="img">
-        </div>
-        <div class="mb-3">
-             <label for="ship" class="form-label">Ship ID:</label>
-           <select name="ship" class="form-control">
-               <?php do {  ?>
-                <option><?php echo $crew1['ship_id'] ?></option>
-             <?php }while($ship= mysqli_fetch_assoc($result4)) ?>
-           </select>
-          </div>
-    </form>
+              <label for="upd_rank" class="form-label">Rank</label>
+              <select class="form-select" aria-label="Default select example" name="upd_rank">
+                    <?php
+                        if(mysqli_num_rows($result3) > 0){
 
-   
+                            do {                     
+                                ?><option value="<?php echo $rank['rank_id'] ?>"
+                                  <?php
+                                    if($crew['rank_id'] == $rank['rank_id']){
+                                      echo "selected";
+                                    }
+                                  ?>><?php echo $rank['rank_name']; ?></option><?php
+                            } while ($rank = mysqli_fetch_assoc($result3));
+                        }
+                    ?>
+               </select>
+            </div>  
 
-    </div>
+            <div class="mb-3">
+              <label for="upd_ship" class="form-label">Designated Ship</label>
+              <select class="form-select" aria-label="Default select example" name="upd_ship">
+                    <?php
+                        if(mysqli_num_rows($result4) > 0){
+                            do {                     
+                                ?><option value="<?php echo $ship['ship_id'] ?>"
+                                  <?php
+                                    if($crew['ship_id'] == $ship['ship_id']){
+                                      echo "selected";
+                                    }
+                                  ?>><?php echo $ship['ship_name']; ?></option><?php
+                            } while ($ship = mysqli_fetch_assoc($result4));
+                        }
+                    ?>
+               </select>
+            </div>  
+
   </div>
+  <div class="card-footer">
+      <input type="hidden" name="the_id" value="<?php echo $id; ?>">
+      <button type="submit" class="btn btn-secondary" name="back_edit">Back</button> <button type="submit" class="btn btn-primary" name="save_edit">Save Changes</button>
+  </div>
+</form>
 </div>
 
     
 
   </div>
-<script>
-								function preview(event){
-									var output = document.getElementById('preimage');
-									output.src = URL.createObjectURL(event.target.files[0]);
-								};
-							</script> 
-
-
-
-
-
 
 </section>
-
-   
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>

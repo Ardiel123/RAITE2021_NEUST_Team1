@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Oct 23, 2021 at 06:03 AM
+-- Generation Time: Oct 23, 2021 at 09:22 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -35,6 +35,13 @@ CREATE TABLE `admin` (
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_fname`, `admin_lname`, `username`, `password`) VALUES
+(1, 'admin', 'admin', 'admin', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -45,10 +52,16 @@ CREATE TABLE `crew` (
   `crew_id` int(25) NOT NULL,
   `fname` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
-  `rank` varchar(50) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `rank_id` int(25) NOT NULL,
   `ship_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `crew`
+--
+
+INSERT INTO `crew` (`crew_id`, `fname`, `surname`, `rank_id`, `ship_id`) VALUES
+(1, 'ardiel', 'salatamos', 1, 11);
 
 -- --------------------------------------------------------
 
@@ -58,8 +71,7 @@ CREATE TABLE `crew` (
 
 CREATE TABLE `departure` (
   `departure_id` int(25) NOT NULL,
-  `ship_id` int(25) NOT NULL,
-  `route_id` int(25) NOT NULL
+  `ship_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -73,6 +85,31 @@ CREATE TABLE `rank` (
   `rank_name` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `rank`
+--
+
+INSERT INTO `rank` (`rank_id`, `rank_name`) VALUES
+(1, 'Master'),
+(2, 'ChiefMate'),
+(3, 'ThirdMate'),
+(4, 'DeckCadet'),
+(5, 'ChiefEngineer'),
+(6, 'SecondEngineer'),
+(7, 'ThirdEngineeer'),
+(8, 'FourthEngineer'),
+(9, 'EngineCadet'),
+(10, 'Electrician'),
+(11, 'Boatswain'),
+(12, 'Pump Man'),
+(13, 'Able-Bodied-Seaman'),
+(14, 'Ordinary Seaman'),
+(15, 'Fitter'),
+(16, 'Oiler'),
+(17, 'Wiper'),
+(18, 'Chief Cook'),
+(19, 'Steward');
+
 -- --------------------------------------------------------
 
 --
@@ -85,6 +122,14 @@ CREATE TABLE `route` (
   `distance` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `route`
+--
+
+INSERT INTO `route` (`route_id`, `destination`, `distance`) VALUES
+(1, 'cebu', 100),
+(2, 'Manila', 233);
+
 -- --------------------------------------------------------
 
 --
@@ -93,9 +138,23 @@ CREATE TABLE `route` (
 
 CREATE TABLE `ship` (
   `ship_id` int(50) NOT NULL,
+  `ship_name` varchar(25) NOT NULL,
   `speed` varchar(20) NOT NULL,
-  `knots` float NOT NULL
+  `knots` float NOT NULL,
+  `route_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ship`
+--
+
+INSERT INTO `ship` (`ship_id`, `ship_name`, `speed`, `knots`, `route_id`) VALUES
+(2, 'sh', 'Normal', 23, 2),
+(10, 'ship2', 'Slow Streaming', 19, 1),
+(11, 'ship3', 'Extra Slow Streaming', 16.5, 1),
+(12, 'bark', 'Extra Slow Streaming', 16.5, 1),
+(13, 'big one', 'Minimal Costs', 13.5, 2),
+(14, 'asdasdas', 'Normal', 23, 1);
 
 --
 -- Indexes for dumped tables
@@ -112,6 +171,7 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `crew`
   ADD PRIMARY KEY (`crew_id`),
+  ADD KEY `rank_id` (`rank_id`),
   ADD KEY `ship_id` (`ship_id`);
 
 --
@@ -119,8 +179,13 @@ ALTER TABLE `crew`
 --
 ALTER TABLE `departure`
   ADD PRIMARY KEY (`departure_id`),
-  ADD KEY `ship` (`ship_id`),
-  ADD KEY `route` (`route_id`);
+  ADD KEY `ship` (`ship_id`);
+
+--
+-- Indexes for table `rank`
+--
+ALTER TABLE `rank`
+  ADD PRIMARY KEY (`rank_id`);
 
 --
 -- Indexes for table `route`
@@ -132,7 +197,8 @@ ALTER TABLE `route`
 -- Indexes for table `ship`
 --
 ALTER TABLE `ship`
-  ADD PRIMARY KEY (`ship_id`);
+  ADD PRIMARY KEY (`ship_id`),
+  ADD KEY `route_id` (`route_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -142,13 +208,13 @@ ALTER TABLE `ship`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `crew`
 --
 ALTER TABLE `crew`
-  MODIFY `crew_id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `crew_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `departure`
@@ -157,16 +223,22 @@ ALTER TABLE `departure`
   MODIFY `departure_id` int(25) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `rank`
+--
+ALTER TABLE `rank`
+  MODIFY `rank_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `route`
 --
 ALTER TABLE `route`
-  MODIFY `route_id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `route_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ship`
 --
 ALTER TABLE `ship`
-  MODIFY `ship_id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `ship_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -176,14 +248,20 @@ ALTER TABLE `ship`
 -- Constraints for table `crew`
 --
 ALTER TABLE `crew`
-  ADD CONSTRAINT `ship_id` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`ship_id`);
+  ADD CONSTRAINT `rank_id` FOREIGN KEY (`rank_id`) REFERENCES `rank` (`rank_id`),
+  ADD CONSTRAINT `ship_id` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`ship_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `departure`
 --
 ALTER TABLE `departure`
-  ADD CONSTRAINT `route` FOREIGN KEY (`route_id`) REFERENCES `route` (`route_id`),
   ADD CONSTRAINT `ship` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`ship_id`);
+
+--
+-- Constraints for table `ship`
+--
+ALTER TABLE `ship`
+  ADD CONSTRAINT `route_id` FOREIGN KEY (`route_id`) REFERENCES `route` (`route_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

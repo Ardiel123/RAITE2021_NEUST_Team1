@@ -24,7 +24,6 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Rank</th>
-                <th>Image</th>
                 <th>Ship ID</th>
                 <th>Actions</th>
             </tr>
@@ -35,9 +34,8 @@
                 <td><?php echo $crew['crew_id'] ?></td>
                 <td><?php echo $crew['fname'] ?></td>
                 <td><?php echo $crew['surname'] ?></td>
-                <td><?php echo $crew['rank'] ?></td>
-                <td><?php echo $crew['image'] ?></td>
-                <td><?php echo $crew['ship_id'] ?></td>
+                <td><?php echo $crew['rank_name'] ?></td>
+                <td><?php echo $crew['ship_name'] ?></td>
                  <td><a href="crew_edit.php?id=<?php echo $crew['crew_id'] ?>"><button type="button" class="btn btn-info">Edit</button></a></td>
             </tr>
             <?php }while($crew = mysqli_fetch_assoc($result2)) ?>
@@ -61,11 +59,6 @@
   </div>
 
 
-
-
-
-
-
 </section>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,7 +70,7 @@
       </div>
       <div class="modal-body">
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST">
           <div class="mb-3 mt-3">
             <label for="fname" class="form-label">First Name:</label>
             <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname">
@@ -95,15 +88,11 @@
               
            </select>
           </div>
-       <div class="form-group">
-             <label for="img">Display Image: <span>*</span></label>
-            <input  type="file" class="form-control" name="img">
-        </div>
         <div class="mb-3">
-             <label for="ship" class="form-label">Ship ID:</label>
+             <label for="ship" class="form-label">Ship Name:</label>
            <select name="ship" class="form-control">
                <?php do {  ?>
-                <option><?php echo $ship['ship_id'] ?></option>
+                <option><?php echo $ship['ship_name'] ?></option>
              <?php }while($ship= mysqli_fetch_assoc($result4)) ?>
            </select>
           </div>
